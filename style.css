@@ -68,6 +68,7 @@ body {
     margin-top: 5px;
 }
 
+
 .circle {
     background-color: white;
     border-radius: 100%;
@@ -79,5 +80,55 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
+
+.first-order,
+.second-order,
+.third-order,
+.total-container
+{
+    width: 427px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.complet-order-btn,
+.pay-btn,
+.thank-you-msg
+{
+    background-color: lightgreen;
+    border: none;
+}
+
+.complet-order-btn {
+    padding: 10px 173px;
+}
+
+.form-el {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+input {
+    width: 280px;
+    height: 30px;
+    padding-left: 10px;
+}
+ 
+.pay-btn {
+    padding: 10px 138px;
+}
+
+.thank-you-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 200px;
+    height: 50px;
+} 
+
+
  
