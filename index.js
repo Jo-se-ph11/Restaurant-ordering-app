@@ -50,10 +50,10 @@ circles.forEach(circle => {
 }
 
 function getPizza(){
-
-    let myOrder = ""
-    myOrder = `
-        <div class="your-order">
+    
+    let myOrder = document.createElement('div');
+    myOrder.classList.add('your-order');
+    myOrder.innerHTML = `
             <div class="first-order pizza">
                 <div>${menuArray[0].name}</div>
                 <div class = "pizza-price">$${menuArray[0].price}</div>
@@ -64,9 +64,8 @@ function getPizza(){
                 </div>
                
             </div>
-        </div>
-`
-order.innerHTML += myOrder;
+`;
+order.appendChild(myOrder);
 const addBtnPizza = document.getElementById("add-btn-pizza")
 const subtractBtnPizza = document.getElementById("subtract-btn-pizza")
 addBtnPizza.addEventListener("click", (event)=>{
@@ -110,9 +109,9 @@ function getLessPizza(){
 }
 
 function getHamburger(){
-    let myOrder = ""
-    myOrder = `
-    <div class = "your-order" >
+    let myOrder = document.createElement('div');
+    myOrder.classList.add('your-order');
+    myOrder.innerHTML = `
         <div class = "hamburger third-order">
             <div>${menuArray[1].name}</div>
             <div class = "burger-price" >${"$" + menuArray[1].price}</div>
@@ -123,10 +122,9 @@ function getHamburger(){
                 </div>
                
         </div>
-    </div>
 `
    
-order.innerHTML += myOrder
+order.appendChild(myOrder);
 const addBtnBurger = document.getElementById("add-btn-burger")
 const subtractBtnBurger = document.getElementById("subtract-btn-burger")
 addBtnBurger.addEventListener("click", (event)=> {
@@ -170,12 +168,12 @@ function getLessHamBurger(){
 }
 
 function getBeer(){
-    let myOrder = ""
-        myOrder = `
-        <div class="your-order">
+    let myOrder = document.createElement('div');
+    myOrder.classList.add('your-order');
+    myOrder.innerHTML = `
             <div class="second-order beer">
                 <div>${menuArray[2].name}</div>
-                <div class = "beer-price">${"$" + menuArray[2].price}</div>
+                <div class = "beer-price">${'$' + menuArray[2].price}</div>
                 <div>
                     <span class="beer-quantity">Qty: 1</span>
                     <button id="add-btn-beer">+</button>
@@ -183,9 +181,8 @@ function getBeer(){
                 </div>
                
             </div>
-        </div>
-`
-order.innerHTML += myOrder
+`;
+order.appendChild(myOrder);
 const addBtnBeer = document.getElementById("add-btn-beer")
 const subtractBtnBeer = document.getElementById("subtract-btn-beer")
 addBtnBeer.addEventListener("click", (event)=> {
