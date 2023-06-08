@@ -10,8 +10,11 @@ let beerQuantity = 1;
 let beerResult = 12;
 
 menuArray.forEach((menu) => {
-    render(menu);  
+    render(menu);
+      
+    
 })
+completOrderBtn()
 
 function render(item) {
 let myMenu = `
@@ -46,11 +49,12 @@ circles.forEach(circle => {
 
             }
         })
-    })   
+    })  
+      
 }
 
 function getPizza(){
-
+    let newOrder = document.createElement("div")
     let myOrder = ""
     myOrder = `
         <div class="your-order">
@@ -66,7 +70,8 @@ function getPizza(){
             </div>
         </div>
 `
-order.innerHTML += myOrder;
+newOrder.innerHTML += myOrder
+order.appendChild(newOrder)
 const addBtnPizza = document.getElementById("add-btn-pizza")
 const subtractBtnPizza = document.getElementById("subtract-btn-pizza")
 addBtnPizza.addEventListener("click", (event)=>{
@@ -76,7 +81,9 @@ addBtnPizza.addEventListener("click", (event)=>{
 subtractBtnPizza.addEventListener("click", (event)=>{
     event.preventDefault()
     getLessPizza()
+
 })
+
 }
 
 function getMorePizza(){
@@ -110,6 +117,7 @@ function getLessPizza(){
 }
 
 function getHamburger(){
+    let newOrder = document.createElement("div")
     let myOrder = ""
     myOrder = `
     <div class = "your-order" >
@@ -126,7 +134,8 @@ function getHamburger(){
     </div>
 `
    
-order.innerHTML += myOrder
+newOrder.innerHTML += myOrder
+order.appendChild(newOrder)
 const addBtnBurger = document.getElementById("add-btn-burger")
 const subtractBtnBurger = document.getElementById("subtract-btn-burger")
 addBtnBurger.addEventListener("click", (event)=> {
@@ -170,6 +179,7 @@ function getLessHamBurger(){
 }
 
 function getBeer(){
+    let newOrder = document.createElement("div")
     let myOrder = ""
         myOrder = `
         <div class="your-order">
@@ -185,7 +195,8 @@ function getBeer(){
             </div>
         </div>
 `
-order.innerHTML += myOrder
+newOrder.innerHTML += myOrder
+order.appendChild(newOrder)
 const addBtnBeer = document.getElementById("add-btn-beer")
 const subtractBtnBeer = document.getElementById("subtract-btn-beer")
 addBtnBeer.addEventListener("click", (event)=> {
@@ -229,92 +240,106 @@ function getLessBeer(){
    
 }
 
-// function handleClicks(event){
-//     const just = event.target
-//     if(just.classList.contains("your-order")) {
-//         if(just.textContent === "Pizza"){
-//             console.log("na pizza ohhh")
-//         }
-//     }
-    
-// }
-
-// function add(a,b) {
-//     let num1 = Number(a);
-//     let num2 = Number(b)
-//     let price = num1 + num2;
-//     console.log(price)
-//     let myOrder = ""
-//     myOrder = `
-//     <div class="your-order">
-//         <div class = total-container>
-//         <div class = "total-price-text"></div>
-//         <div class = "total-price"></div>
-//         </div
-       
-//     </div>
-// `
-
-// order.innerHTML += myOrder
-// const total = document.querySelector(".total-price");
-// const totalText = document.querySelector(".total-price-text");
-// total.textContent = "$" + price;
-// totalText.textContent = "Total price ";
-// completOrderBtn()
-// }
-
-// function completOrderBtn() {
-//     let myOrder = ""
-//     myOrder = `
-//     <button class="complet-order-btn">
-//         Complet oder
-//         </div
-       
-//     </div>
-// `
-// order.innerHTML += myOrder;
-// add( menuArray[0].price, menuArray[1].price)
-// const completOrderBtn = document.querySelector(".complet-order-btn");
-// completOrderBtn.addEventListener("click", () => {
-//     console.log("complete order");
-//     getForm() 
-// })
-// }
-
-// function getForm() {
-
-//     let myOrder = ""
-//     myOrder = 
-//     `
-//     <form  id="myForm" method = "post>
-//         <div class="display">Your Order</div>
-//         <div class="form-el">
-//             <input type="text" id = "food" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
-//             <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
-//             <input type="tel" required  placeholder = "Enter cvv" name = "tel" id= "card-number" aria-label="card-number">
-//         </div>
-//         <button  type="submit" class = "pay-btn">Pay</button>
-//     </form>
-//     `
-//     formDisplay.innerHTML += myOrder;
-//     order.appendChild(formDisplay) 
-//     const payBtn = document.querySelector(".pay-btn");
-//     payBtn.addEventListener("click", (event) => {
-//         event.preventDefault();
-//         console.log("food")
-//         showCheckOutPage()
+function completOrderBtn() {
+    const displayBtn = document.querySelector(".btn-display")
+        let myOrder = ""
+        myOrder = `
+        <div>
+            <button class="complet-order-btn">
+                Complet oder
+            </button>
+        </div>
+    `
+    displayBtn.innerHTML += myOrder
+    const btn = document.querySelector(".complet-order-btn")
+    console.log(btn)
+    btn.addEventListener("click", () => {
+        getAmount()
         
-//     })
-// }
+        
+    })
+}
 
-// function showCheckOutPage() {
+function getAmount(){
+    const circles = document.querySelectorAll(".circle")
+    circles.forEach(circle => {
+        if(circle.dataset.id == 2){
+            console.log("Hi")
+        }        
+    })
+    const pizzaOrder = document.querySelector(".pizza-price")
    
-//     formDisplay.textContent =""
-//     order.textContent = ""
-//     main.innerHTML += `<div class = "thank-you-msg">
-//     <div>thank you for buying</div>
+    
+   
+}
 
-//     </div>`
-//     console.log("thank you")
-// }
- 
+function removeDollarSign(dollar){
+   
+    let numberWithDollar = Number(dollar.replace("$", ""));
+    return numberWithDollar
+}
+
+function getTotalOfItems(){
+    const totalContainer = document.querySelector(".total")
+    let displayTotal = document.createElement("div")
+    let myOrder = ""
+    myOrder = `
+    <div class="your-order">
+        <div class = total-container>
+            <div class = "total-price-text"></div>
+            <div class = "total-price"></div>
+        </div
+       
+    </div>
+`
+displayTotal.innerHTML += myOrder
+totalContainer.appendChild(displayTotal)
+const total = document.querySelector(".total-price");
+const totalText = document.querySelector(".total-price-text");
+
+totalText.textContent = "Total price ";
+    let sum = 0;
+    for(let i = 0; i < arguments.length; i++) {
+        sum += arguments[i];
+    }    total.textContent = "$" + sum;
+   
+}
+
+                                            
+
+// // function getForm() {
+
+// //     let myOrder = ""
+// //     myOrder = 
+// //     `
+// //     <form  id="myForm" method = "post>
+// //         <div class="display">Your Order</div>
+// //         <div class="form-el">
+// //             <input type="text" id = "food" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
+// //             <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
+// //             <input type="tel" required  placeholder = "Enter cvv" name = "tel" id= "card-number" aria-label="card-number">
+// //         </div>
+// //         <button  type="submit" class = "pay-btn">Pay</button>
+// //     </form>
+// //     `
+// //     formDisplay.innerHTML += myOrder;
+// //     order.appendChild(formDisplay) 
+// //     const payBtn = document.querySelector(".pay-btn");
+// //     payBtn.addEventListener("click", (event) => {
+// //         event.preventDefault();
+// //         console.log("food")
+// //         showCheckOutPage()
+        
+// //     })
+// // }
+
+// // function showCheckOutPage() {
+   
+// //     formDisplay.textContent =""
+// //     order.textContent = ""
+// //     main.innerHTML += `<div class = "thank-you-msg">
+// //     <div>thank you for buying</div>
+
+// //     </div>`
+// //     console.log("thank you")
+// // }
