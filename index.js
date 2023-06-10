@@ -57,7 +57,7 @@ function getPizza(){
     let newOrder = document.createElement("div")
     let myOrder = ""
     myOrder = `
-        <div class="your-order">
+        <div class="your-order" id = "pizza">
             <div class="first-order pizza">
                 <div>${menuArray[0].name}</div>
                 <div class = "pizza-price">$${menuArray[0].price}</div>
@@ -120,7 +120,7 @@ function getHamburger(){
     let newOrder = document.createElement("div")
     let myOrder = ""
     myOrder = `
-    <div class = "your-order" >
+    <div class = "your-order" id = "burger" >
         <div class = "hamburger third-order">
             <div>${menuArray[1].name}</div>
             <div class = "burger-price" >${"$" + menuArray[1].price}</div>
@@ -161,18 +161,18 @@ function getMoreHamBurger(){
 }
 
 function getLessHamBurger(){
-    hamburgerResult -= Number( `${menuArray[1].price}`)
-    console.log(hamburgerResult)
+    hamburgerResult -= Number( `${menuArray[1].price}`);
+    console.log(hamburgerResult);
     const burgerPrice = document.querySelector(".burger-price")
     const qty = document.querySelector(".burger-quantity");
     hamburgerQuantity -= 1;
     if( hamburgerQuantity >= 0 &&  hamburgerResult >= 0 ){
         qty.textContent = ` Qty: ${hamburgerQuantity}`
-        burgerPrice.textContent = "$" + hamburgerResult
-    }else if( (hamburgerQuantity == 0|| -12) &&  (hamburgerResult == 0|| -1) ){
+        burgerPrice.textContent = "$" + hamburgerResult;
+    }else if( (hamburgerQuantity == 0|| -12) &&  (hamburgerResult == 0 || -1) ){
         const subtractBtnBurger = document.getElementById("subtract-btn-burger")
-        subtractBtnBurger.disabled = true
-        console.log("too low")
+        subtractBtnBurger.disabled = true;
+        console.log("too low");
 
     }
    
@@ -182,7 +182,7 @@ function getBeer(){
     let newOrder = document.createElement("div")
     let myOrder = ""
         myOrder = `
-        <div class="your-order">
+        <div class="your-order" id = "beer">
             <div class="second-order beer">
                 <div>${menuArray[2].name}</div>
                 <div class = "beer-price">${"$" + menuArray[2].price}</div>
@@ -255,29 +255,65 @@ function completOrderBtn() {
     console.log(btn)
     btn.addEventListener("click", () => {
         getAmount()
-        
-        
+      
     })
 }
 
 function getAmount(){
-    const circles = document.querySelectorAll(".circle")
-    circles.forEach(circle => {
-        if(circle.dataset.id == 2){
-            console.log("Hi")
-        }        
-    })
-    const pizzaOrder = document.querySelector(".pizza-price")
-   
-    
-   
+   const pizza = document.getElementById("pizza");
+   const burger = document.getElementById("burger");
+   const beer = document.getElementById("beer");
+   const beerPrice = document.querySelector(".beer-price")
+   const burgerPrice = document.querySelector(".burger-price")
+   const pizzaPrice = document.querySelector(".pizza-price")
+   const total = document.querySelector(".total-price");
+
+   if(order.contains(pizza) && order.contains(beer) && order.contains(burger)){
+       console.log(pizzaPrice.textContent)
+       console.log(beerPrice.textContent)
+       console.log(burgerPrice.textContent)
+   }else if(order.contains(pizza) && order.contains(beer)) {
+        if(order.contains(pizza) || order.contains(beer)){
+            console.log("one already exist")
+        }else{
+            console.log(pizzaPrice.textContent)
+            console.log(beerPrice.textContent)
+        }
+   }else if(order.contains(pizza) && order.contains(burger)){
+        console.log(pizzaPrice.textContent)
+        console.log(burgerPrice.textContent)
+        let now  = removeDollarSign(`${pizzaPrice.textContent}, ${burgerPrice.textContent}`)
+        console.log(now)
+        getTotalOfItems(now)
+
+   }else if(order.contains(burger) && order.contains(beer)){
+        console.log(burgerPrice.textContent)
+        console.log(pizzaPrice.textContent)
+   }else if(order.contains(burger)){
+        console.log(burgerPrice.textContent)
+   }else if( order.contains(beer)){
+        console.log(beerPrice.textContent)
+   }else if(order.contains(pizza)){
+         //console.log(pizzaPrice.textContent)
+    //    let now  = removeDollarSign(`${pizzaPrice.textContent}`)
+    //    console.log(now)
+    //    getTotalOfItems(now)
+
+   }    
 }
 
-function removeDollarSign(dollar){
-   
-    let numberWithDollar = Number(dollar.replace("$", ""));
-    return numberWithDollar
+function removeDollarSign(){
+    let arr = [];
+    for(let i = 0; i < arguments.length; i++){
+
+        let numberWithDollar = Number(arguments[i].replace("$", ""));
+       // return numberWithDollar;
+        arr.push( numberWithDollar)
+       
+    }
 }
+
+removeDollarSign("$2","$3", "$7", "$9")
 
 function getTotalOfItems(){
     const totalContainer = document.querySelector(".total")
@@ -299,14 +335,25 @@ const totalText = document.querySelector(".total-price-text");
 
 totalText.textContent = "Total price ";
     let sum = 0;
-    for(let i = 0; i < arguments.length; i++) {
-        sum += arguments[i];
-    }    total.textContent = "$" + sum;
-   
+    for(let i = 0; i < arguments.length; i++){
+        const arg = arguments[i]
+        if(Array.isArray(arg)){
+            for(let j = 0; j < arg.length; j++)
+                sum += arg[j]
+        }else {
+            sum += arg
+        }
+    }
+   // return sum
+    console.log(total.textContent)
+    // removeDollarSign(`${total}`)
+    // console.log(removeDollarSign(`${total.textContent}`))
+                        // how much have I prayer
+                       //  how often have I read the bible and listen to the bible
+                      //   how often have I worship
+                     //    how often have I gone for soul winning
+                    //     how often have I been giving
 }
-
-                                            
-
 // // function getForm() {
 
 // //     let myOrder = ""
