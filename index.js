@@ -1,6 +1,7 @@
 import { menuArray } from "./assests.js";
 const main = document.getElementById("main");
 const order = document.getElementById("order");
+const smallOrder = document.querySelector(".your-order")
 const formDisplay = document.getElementById("form-display");
 let pizzaQuantity = 1;
 let pizzaResult = 14;
@@ -252,10 +253,9 @@ function completOrderBtn() {
     `
     displayBtn.innerHTML += myOrder
     const btn = document.querySelector(".complet-order-btn")
-    console.log(btn)
     btn.addEventListener("click", () => {
         getAmount()
-      
+        getForm()
     })
 }
 
@@ -267,7 +267,6 @@ function getAmount(){
    const burgerPrice = document.querySelector(".burger-price")
    const pizzaPrice = document.querySelector(".pizza-price")
    const total = document.querySelector(".total-price");
-    const arr = []
    if(order.contains(pizza) && order.contains(beer) && order.contains(burger)){
       
        let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
@@ -279,7 +278,7 @@ function getAmount(){
        
         let myBeerPrice = removeDollarSign(`${beerPrice.textContent} `)
         let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
-        getTotalOfItems( myPizzaPrice,myBurgerPrice,myBeerPrice)
+        getTotalOfItems( myPizzaPrice,myBeerPrice)
 
    }else if(order.contains(pizza) && order.contains(burger)){
 
@@ -316,16 +315,11 @@ function removeDollarSign(){
     for(let i = 0; i < arguments.length; i++){
 
         let numberWithDollar = Number(arguments[i].replace("$", ""));
-       //return numberWithDollar;
         arr.push( numberWithDollar)
        
     }
-    return arr
-    // getTotalOfItems(arr)
-    
+    return arr    
 }
-
-//removeDollarSign("$2","$3", "$7", "$9")
 
 function getTotalOfItems(){
     const totalContainer = document.querySelector(".total")
@@ -356,71 +350,34 @@ totalText.textContent = "Total price ";
             sum += arg
         }
     }
-   // return sum
-    console.log(total.textContent =  sum)
-    console.log(typeof(sum))
-    // removeDollarSign(`${total}`)
-    // console.log(removeDollarSign(`${total.textContent}`))
-                        // how much have I prayer
-                       //  how often have I read the bible and listen to the bible
-                      //   how often have I worship
-                     //    how often have I gone for soul winning
-                    //     how often have I been giving
+    total.textContent =  sum
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // function getForm() {
-
-// //     let myOrder = ""
-// //     myOrder = 
-// //     `
-// //     <form  id="myForm" method = "post>
-// //         <div class="display">Your Order</div>
-// //         <div class="form-el">
-// //             <input type="text" id = "food" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
-// //             <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
-// //             <input type="tel" required  placeholder = "Enter cvv" name = "tel" id= "card-number" aria-label="card-number">
-// //         </div>
-// //         <button  type="submit" class = "pay-btn">Pay</button>
-// //     </form>
-// //     `
-// //     formDisplay.innerHTML += myOrder;
-// //     order.appendChild(formDisplay) 
-// //     const payBtn = document.querySelector(".pay-btn");
-// //     payBtn.addEventListener("click", (event) => {
-// //         event.preventDefault();
-// //         console.log("food")
-// //         showCheckOutPage()
+function getForm() {
+    let form = document.createElement("div");
+    let myOrder = ""
+    myOrder = 
+    `
+    <form  id="myForm" method = "post>
+        <div class="display">Your Order</div>
+        <div class="form-el">
+            <input type="text" id = "food" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
+            <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
+            <input type="tel" required  placeholder = "Enter cvv" name = "tel" id= "card-number" aria-label="card-number">
+        </div>
+        <button  type="submit" class = "pay-btn">Pay</button>
+    </form>
+    `
+    form.innerHTML += myOrder;
+    formDisplay.appendChild(form)
+    const payBtn = document.querySelector(".pay-btn");
+    payBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("food")
+        //showCheckOutPage()
         
-// //     })
-// // }
+    })
+}
 
 // // function showCheckOutPage() {
    
