@@ -267,37 +267,46 @@ function getAmount(){
    const burgerPrice = document.querySelector(".burger-price")
    const pizzaPrice = document.querySelector(".pizza-price")
    const total = document.querySelector(".total-price");
-
+    const arr = []
    if(order.contains(pizza) && order.contains(beer) && order.contains(burger)){
-       console.log(pizzaPrice.textContent)
-       console.log(beerPrice.textContent)
-       console.log(burgerPrice.textContent)
-   }else if(order.contains(pizza) && order.contains(beer)) {
-        if(order.contains(pizza) || order.contains(beer)){
-            console.log("one already exist")
-        }else{
-            console.log(pizzaPrice.textContent)
-            console.log(beerPrice.textContent)
-        }
-   }else if(order.contains(pizza) && order.contains(burger)){
-        console.log(pizzaPrice.textContent)
-        console.log(burgerPrice.textContent)
-        let now  = removeDollarSign(`${pizzaPrice.textContent}, ${burgerPrice.textContent}`)
-        console.log(now)
-        getTotalOfItems(now)
+      
+       let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
+       let myBeerPrice = removeDollarSign(`${beerPrice.textContent} `)
+       let myBurgerPrice = removeDollarSign(`${burgerPrice.textContent} `)
+       getTotalOfItems( myPizzaPrice,myBurgerPrice,myBeerPrice)
 
+    }else if(order.contains(pizza) && order.contains(beer)) {
+       
+        let myBeerPrice = removeDollarSign(`${beerPrice.textContent} `)
+        let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
+        getTotalOfItems( myPizzaPrice,myBurgerPrice,myBeerPrice)
+
+   }else if(order.contains(pizza) && order.contains(burger)){
+
+        let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
+        let myBurgerPrice = removeDollarSign(`${burgerPrice.textContent} `)
+        getTotalOfItems( myPizzaPrice,myBurgerPrice)
+        
    }else if(order.contains(burger) && order.contains(beer)){
-        console.log(burgerPrice.textContent)
-        console.log(pizzaPrice.textContent)
+
+        let myBurgerPrice = removeDollarSign(`${burgerPrice.textContent} `)
+        let myBeerPrice = removeDollarSign(`${beerPrice.textContent} `)
+        getTotalOfItems( myBeerPrice,myBurgerPrice)
+        
    }else if(order.contains(burger)){
-        console.log(burgerPrice.textContent)
+
+        let myBurgerPrice = removeDollarSign(`${burgerPrice.textContent} `)
+        getTotalOfItems(myBurgerPrice)
+        
    }else if( order.contains(beer)){
-        console.log(beerPrice.textContent)
+    
+        let myBeerPrice = removeDollarSign(`${beerPrice.textContent} `)
+        getTotalOfItems( myBeerPrice)
+
    }else if(order.contains(pizza)){
-         //console.log(pizzaPrice.textContent)
-    //    let now  = removeDollarSign(`${pizzaPrice.textContent}`)
-    //    console.log(now)
-    //    getTotalOfItems(now)
+
+        let myPizzaPrice  = removeDollarSign(`${pizzaPrice.textContent} `)
+        getTotalOfItems(myPizzaPrice)
 
    }    
 }
@@ -307,13 +316,16 @@ function removeDollarSign(){
     for(let i = 0; i < arguments.length; i++){
 
         let numberWithDollar = Number(arguments[i].replace("$", ""));
-       // return numberWithDollar;
+       //return numberWithDollar;
         arr.push( numberWithDollar)
        
     }
+    return arr
+    // getTotalOfItems(arr)
+    
 }
 
-removeDollarSign("$2","$3", "$7", "$9")
+//removeDollarSign("$2","$3", "$7", "$9")
 
 function getTotalOfItems(){
     const totalContainer = document.querySelector(".total")
@@ -345,7 +357,8 @@ totalText.textContent = "Total price ";
         }
     }
    // return sum
-    console.log(total.textContent)
+    console.log(total.textContent =  sum)
+    console.log(typeof(sum))
     // removeDollarSign(`${total}`)
     // console.log(removeDollarSign(`${total.textContent}`))
                         // how much have I prayer
@@ -354,6 +367,35 @@ totalText.textContent = "Total price ";
                      //    how often have I gone for soul winning
                     //     how often have I been giving
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // function getForm() {
 
 // //     let myOrder = ""
