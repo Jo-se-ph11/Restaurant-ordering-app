@@ -1,7 +1,7 @@
 import { menuArray } from "./assests.js";
 const main = document.getElementById("main");
 const order = document.getElementById("order");
-const smallOrder = document.querySelector(".your-order")
+const smallOrder = document.querySelector(".btn-display")
 const formDisplay = document.getElementById("form-display");
 let pizzaQuantity = 1;
 let pizzaResult = 14;
@@ -15,7 +15,7 @@ menuArray.forEach((menu) => {
       
     
 })
-completOrderBtn()
+
 
 function render(item) {
 let myMenu = `
@@ -39,14 +39,26 @@ circles.forEach(circle => {
             if(circle.dataset.id == 0) {
                 getPizza()
                 circle.disabled = true
+                if(smallOrder.textContent == ""){
+                    console.log("Joseph")
+                    completOrderBtn()
+                }
                 
             }else if(circle.dataset.id == 1) {
                 getHamburger()
                 circle.disabled = true
+                if(smallOrder.textContent == ""){
+                    console.log("Joseph")
+                    completOrderBtn()
+                }
 
             }else if(circle.dataset.id == 2)  {
                 getBeer()
                 circle.disabled = true
+                if(smallOrder.textContent == ""){
+                    console.log("Joseph")
+                    completOrderBtn()
+                }
 
             }
         })
@@ -238,9 +250,8 @@ function getLessBeer(){
         console.log("too low")
 
     }
-   
 }
-
+// completOrderBtn() 
 function completOrderBtn() {
     const displayBtn = document.querySelector(".btn-display")
         let myOrder = ""
@@ -254,9 +265,75 @@ function completOrderBtn() {
     displayBtn.innerHTML += myOrder
     const btn = document.querySelector(".complet-order-btn")
     btn.addEventListener("click", () => {
+        const pizza = document.getElementById("pizza");
+        const burger = document.getElementById("burger");
+        const beer = document.getElementById("beer");
         getAmount()
-        getForm()
+        const circles = document.querySelectorAll(".circle");
+        btn.disabled = true;
+        circles.forEach(circle => {
+            circle.disabled = true;
+        })
+        if(order.contains(pizza) && order.contains(beer) && order.contains(burger)){
+
+            disableBeerIncrementAndDecrementBtn()
+            disableBurgerIncrementAndDecrementBtn()
+             disablePizzaIncrementAndDecrementBtn()
+             
+        }else if(order.contains(burger) && order.contains(beer)){
+
+            disableBeerIncrementAndDecrementBtn()
+            disableBurgerIncrementAndDecrementBtn()
+            
+        }  else if(order.contains(pizza) && order.contains(burger)) {
+
+            disableBurgerIncrementAndDecrementBtn()
+            disablePizzaIncrementAndDecrementBtn()
+            
+        }else if(order.contains(pizza) && order.contains(beer)) {
+
+            disablePizzaIncrementAndDecrementBtn()
+            disableBeerIncrementAndDecrementBtn()
+
+        }else if(order.contains(pizza)){
+
+            disablePizzaIncrementAndDecrementBtn()
+        }else if(order.contains(burger)){
+
+            disableBurgerIncrementAndDecrementBtn()
+        }else if(order.contains(beer)){
+
+            disableBeerIncrementAndDecrementBtn()
+        }
+            getForm()
+
     })
+}
+
+const btnDisplay = document.querySelector(".btn-display");
+console.log(btnDisplay)
+
+function  disablePizzaIncrementAndDecrementBtn() {
+    const addBtnPizza = document.getElementById("add-btn-pizza");
+    const subtractBtnPizza = document.getElementById("subtract-btn-pizza");
+    subtractBtnPizza.disabled = true;
+    addBtnPizza.disabled = true;
+}
+
+function disableBurgerIncrementAndDecrementBtn() {
+    const addBtnBurger = document.getElementById("add-btn-burger")
+    const subtractBtnBurger = document.getElementById("subtract-btn-burger")
+    addBtnBurger.disabled = true;
+    subtractBtnBurger.disabled = true;
+}
+
+function  disableBeerIncrementAndDecrementBtn(){
+   
+    const addBtnBeer = document.getElementById("add-btn-beer")
+    const subtractBtnBeer = document.getElementById("subtract-btn-beer")
+    subtractBtnBeer.disabled = true;
+    addBtnBeer.disabled = true;
+
 }
 
 function getAmount(){
@@ -378,6 +455,7 @@ function getForm() {
         
     })
 }
+
 
 // // function showCheckOutPage() {
    
