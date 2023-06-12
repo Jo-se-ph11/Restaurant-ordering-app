@@ -9,13 +9,13 @@ let hamburgerQuantity = 1;
 let hamburgerResult = 12;
 let beerQuantity = 1;
 let beerResult = 12;
-
+// RENDER ALL ITEMS ON PAGE LOAD
 menuArray.forEach((menu) => {
     render(menu);
       
     
 })
-
+// CREATE AND DISPLAY THE ITEMS 
 function render(item) {
 let myMenu = `
 <div class = "my-menu">
@@ -32,7 +32,7 @@ let myMenu = `
     `
 main.innerHTML += myMenu;
 const circles = document.querySelectorAll(".circle");
-
+// LOOP THROUGH CIRCLES TO DISPLAY SELECTED ITEM
 circles.forEach(circle => {
     circle.addEventListener("click", () => {
             if(circle.dataset.id == 0) {
@@ -64,7 +64,7 @@ circles.forEach(circle => {
     })  
       
 }
-
+// CREATE THE PIZZA ORDER SECTION
 function getPizza(){
     let newOrder = document.createElement("div")
     let myOrder = ""
@@ -97,7 +97,7 @@ subtractBtnPizza.addEventListener("click", (event)=>{
 })
 
 }
-
+// INCREASE THE QUANTITY AND AMOUNT OF PIZZA SELECTED
 function getMorePizza(){
     
     pizzaResult += Number( `${menuArray[0].price}`)
@@ -110,7 +110,7 @@ function getMorePizza(){
     const subtractBtnPizza = document.getElementById("subtract-btn-pizza")
     subtractBtnPizza.disabled = false
 }
-
+// DECREASE THE QUANTITY AND AMOUNT OF PIZZA SELECTED
 function getLessPizza(){
     pizzaResult -= Number( `${menuArray[0].price}`)
     console.log(pizzaResult)
@@ -127,7 +127,7 @@ function getLessPizza(){
     }
    
 }
-
+// CREATE THE BURGER ORDER SECTION
 function getHamburger(){
     let newOrder = document.createElement("div")
     let myOrder = ""
@@ -160,6 +160,7 @@ subtractBtnBurger.addEventListener("click", (event)=> {
 })
 
 }
+// DECREASE THE QUANTITY AND AMOUNT OF BURGER SELECTED
 function getMoreHamBurger(){
     const subtractBtnBurger = document.getElementById("subtract-btn-burger")
     subtractBtnBurger.disabled = false;
@@ -171,7 +172,7 @@ function getMoreHamBurger(){
     hamburgerQuantity += 1;
     qty.textContent = ` Qty: ${hamburgerQuantity}`
 }
-
+// DECREASE THE QUANTITY AND AMOUNT OF BURGER SELECTED
 function getLessHamBurger(){
     hamburgerResult -= Number( `${menuArray[1].price}`);
     console.log(hamburgerResult);
@@ -189,7 +190,7 @@ function getLessHamBurger(){
     }
    
 }
-
+// CREATE THE BEAR ORDER SECTION
 function getBeer(){
     let newOrder = document.createElement("div")
     let myOrder = ""
@@ -220,8 +221,7 @@ subtractBtnBeer.addEventListener("click", (event)=> {
     getLessBeer()
 })
 }
-
-
+// INCREASE THE QUANTITY AND AMOUNT OF BEER SELECTED
 function getMoreBeer(){
     const subtractBtnBeer = document.getElementById("subtract-btn-beer")
     subtractBtnBeer.disabled = false
@@ -233,7 +233,7 @@ function getMoreBeer(){
     beerQuantity += 1;
     qty.textContent = ` Qty: ${beerQuantity}`
 }
-
+// DECREASE THE QUANTITY AND AMOUNT OF BEER SELECTED
 function getLessBeer(){
     beerResult -= Number( `${menuArray[2].price}`)
     console.log(beerResult)
@@ -251,6 +251,7 @@ function getLessBeer(){
     }
 }
 
+// CREATE THE COMPLETE ORDER BTN AND DISABLE ALL OTHER BTNS
 function completOrderBtn() {
     const displayBtn = document.querySelector(".btn-display")
         let myOrder = ""
@@ -383,6 +384,7 @@ function getAmount(){
    }    
 }
 
+// REMOVES THE DOLLAR SIGN FROM THE TOTAL AMOUNT AND CONVERT IT TO NUMBER
 function removeDollarSign(){
     let arr = [];
     for(let i = 0; i < arguments.length; i++){
@@ -393,7 +395,7 @@ function removeDollarSign(){
     }
     return arr    
 }
-
+// CALCULATE THE ITEMS SELECTED
 function getTotalOfItems(){
     const totalContainer = document.querySelector(".total")
     let displayTotal = document.createElement("div")
@@ -425,7 +427,7 @@ totalText.textContent = "Total price ";
     }
     total.textContent =  sum
 }
-
+// CREATE FORM AND DISPLAY IT
 function getForm() {
     let form = document.createElement("div");
     let myOrder = ""
@@ -452,14 +454,13 @@ function getForm() {
         e.preventDefault()
         if(name.value != "" && myNumber.value != "" && cardNumber.value != "" ) {
             showCheckOutPage()
-            // clearBase()
         }else{
           alert("oga fill the form!! No stress me abeg")
         }
       
     }, {once: true})
 }
-
+// DISPLAY THANK YOU PAGE
 function showCheckOutPage() {
   
     main.innerHTML += `
@@ -467,10 +468,10 @@ function showCheckOutPage() {
         <div>thank you for buying</div>
 
     </div>`
-    clearBase()
+    clearOrder()
 }
-
-function clearBase() {
+// CLEAR THE ORDER PAGE
+function clearOrder() {
    
     order.remove()
 
