@@ -1,8 +1,11 @@
 import { menuArray } from "./assests.js";
 const main = document.getElementById("main");
-const order = document.getElementById("order");
+const displayYourOrder= document.querySelector(".display-order");
+const order = document.querySelector(".order")
 const smallOrder = document.querySelector(".btn-display")
 const formDisplay = document.getElementById("form-display");
+const container = document.getElementById("smaller-container")
+const tempOrder = document.getElementById("order");
 let pizzaQuantity = 1;
 let pizzaResult = 14;
 let hamburgerQuantity = 1;
@@ -12,9 +15,15 @@ let beerResult = 12;
 // RENDER ALL ITEMS ON PAGE LOAD
 menuArray.forEach((menu) => {
     render(menu);
-      
-    
 })
+
+function displayOrder(){
+    let done = document.createElement("div")
+    let l = ""
+     l = ` <h3>Your Order</h3>`
+    done.innerHTML += l
+    displayYourOrder.appendChild(done)
+}
 // CREATE AND DISPLAY THE ITEMS 
 function render(item) {
 let myMenu = `
@@ -40,6 +49,7 @@ circles.forEach(circle => {
                 circle.disabled = true
                 if(smallOrder.textContent == ""){
                     console.log("Joseph")
+                    displayOrder()
                     completOrderBtn()
                 }
                 
@@ -48,6 +58,7 @@ circles.forEach(circle => {
                 circle.disabled = true
                 if(smallOrder.textContent == ""){
                     console.log("Joseph")
+                    displayOrder()
                     completOrderBtn()
                 }
 
@@ -56,6 +67,7 @@ circles.forEach(circle => {
                 circle.disabled = true
                 if(smallOrder.textContent == ""){
                     console.log("Joseph")
+                    displayOrder()
                     completOrderBtn()
                 }
 
@@ -75,8 +87,8 @@ function getPizza(){
                 <div class = "pizza-price">$${menuArray[0].price}</div>
                 <div>
                     <span class="quantity">Qty: 1</span>
-                    <button id="add-btn-pizza">+</button>
-                    <button id="subtract-btn-pizza">-</button>
+                    <button  class = "click-btn" id="add-btn-pizza">+</button>
+                    <button  class = "click-btn" id="subtract-btn-pizza">-</button>
                 </div>
                
             </div>
@@ -138,8 +150,8 @@ function getHamburger(){
             <div class = "burger-price" >${"$" + menuArray[1].price}</div>
             <div>
                     <span class = "burger-quantity" >Qty: 1</span>
-                    <button id= "add-btn-burger" >+</button>
-                    <button id = "subtract-btn-burger" >-</button>
+                    <button class = "click-btn" id= "add-btn-burger" >+</button>
+                    <button class = "click-btn" id = "subtract-btn-burger" >-</button>
                 </div>
                
         </div>
@@ -201,8 +213,8 @@ function getBeer(){
                 <div class = "beer-price">${"$" + menuArray[2].price}</div>
                 <div>
                     <span class="beer-quantity">Qty: 1</span>
-                    <button id="add-btn-beer">+</button>
-                    <button id="subtract-btn-beer">-</button>
+                    <button class = "click-btn" id="add-btn-beer">+</button>
+                    <button class = "click-btn" id="subtract-btn-beer">-</button>
                 </div>
                
             </div>
@@ -306,7 +318,22 @@ function completOrderBtn() {
             disableBeerIncrementAndDecrementBtn()
         }
             getForm()
-
+            container.style.background = "lightGrey";
+            circles.forEach(circle => {
+                circle.style.background = "lightGrey";
+            })
+            const addBtnBurger = document.getElementById("add-btn-burger")
+            const subtractBtnBurger = document.getElementById("subtract-btn-burger")
+            const addBtnPizza = document.getElementById("add-btn-pizza");
+            const subtractBtnPizza = document.getElementById("subtract-btn-pizza");
+            const addBtnBeer = document.getElementById("add-btn-beer")
+            const subtractBtnBeer = document.getElementById("subtract-btn-beer")
+            addBtnPizza.style.background = "lightGrey";
+            subtractBtnPizza.style.background = "lightGrey";
+            addBtnBeer.style.background = "lightGrey";
+            subtractBtnBeer.style.background = "lightGrey";
+            addBtnBurger.style.background = "lightGrey";
+            subtractBtnBurger.style.background = "lightGrey";
     })
 }
 
@@ -434,7 +461,7 @@ function getForm() {
     myOrder = 
     ` 
     <form  id="myForm" method = "#">
-        <div class="display">Enter Your Details</div>
+        <div class="form-title">Enter card details</div>
         <div class="form-el">
             <input type="text" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
             <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
@@ -451,9 +478,11 @@ function getForm() {
   
     const payBtn = document.querySelector(".pay-btn");
     payBtn.addEventListener("click", (e)=> {
+        const name = document.getElementById("name");
         e.preventDefault()
         if(name.value != "" && myNumber.value != "" && cardNumber.value != "" ) {
-            showCheckOutPage()
+
+            showCheckOutPage(name.value)
         }else{
           alert("oga fill the form!! No stress me abeg")
         }
@@ -461,18 +490,25 @@ function getForm() {
     }, {once: true})
 }
 // DISPLAY THANK YOU PAGE
-function showCheckOutPage() {
-  
+function showCheckOutPage(name) {
     main.innerHTML += `
     <div class = "thank-you-msg">
-        <div>thank you for buying</div>
+        <div class = "thanks-text" > Thank you ${name}. <br> Your order is on the way...</div>
 
     </div>`
     clearOrder()
+    const circles = document.querySelectorAll(".circle");
+    container.style.background = "white";
+    circles.forEach(circle => {
+        circle.style.background = "white";
+        circle.style.color = "black";
+        console.log("worked")
+    })
+   
 }
 // CLEAR THE ORDER PAGE
 function clearOrder() {
-   
-    order.remove()
+    displayYourOrder.remove()
+    tempOrder.remove()
 
 }
