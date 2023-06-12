@@ -16,7 +16,6 @@ menuArray.forEach((menu) => {
     
 })
 
-
 function render(item) {
 let myMenu = `
 <div class = "my-menu">
@@ -251,7 +250,7 @@ function getLessBeer(){
 
     }
 }
-// completOrderBtn() 
+
 function completOrderBtn() {
     const displayBtn = document.querySelector(".btn-display")
         let myOrder = ""
@@ -309,9 +308,6 @@ function completOrderBtn() {
 
     })
 }
-
-const btnDisplay = document.querySelector(".btn-display");
-console.log(btnDisplay)
 
 function  disablePizzaIncrementAndDecrementBtn() {
     const addBtnPizza = document.getElementById("add-btn-pizza");
@@ -434,36 +430,48 @@ function getForm() {
     let form = document.createElement("div");
     let myOrder = ""
     myOrder = 
-    `
-    <form  id="myForm" method = "post>
-        <div class="display">Your Order</div>
+    ` 
+    <form  id="myForm" method = "#">
+        <div class="display">Enter Your Details</div>
         <div class="form-el">
-            <input type="text" id = "food" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
+            <input type="text" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
             <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
-            <input type="tel" required  placeholder = "Enter cvv" name = "tel" id= "card-number" aria-label="card-number">
+            <input type="tel" required  placeholder = "Enter card number" name = "tel" id= "card-number" aria-label="card-number">
         </div>
         <button  type="submit" class = "pay-btn">Pay</button>
     </form>
     `
     form.innerHTML += myOrder;
     formDisplay.appendChild(form)
+    const name = document.getElementById("name");
+    const myNumber = document.getElementById("number")
+    const cardNumber = document.getElementById("card-number");
+  
     const payBtn = document.querySelector(".pay-btn");
-    payBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        console.log("food")
-        //showCheckOutPage()
-        
-    })
+    payBtn.addEventListener("click", (e)=> {
+        e.preventDefault()
+        if(name.value != "" && myNumber.value != "" && cardNumber.value != "" ) {
+            showCheckOutPage()
+            // clearBase()
+        }else{
+          alert("oga fill the form!! No stress me abeg")
+        }
+      
+    }, {once: true})
 }
 
+function showCheckOutPage() {
+  
+    main.innerHTML += `
+    <div class = "thank-you-msg">
+        <div>thank you for buying</div>
 
-// // function showCheckOutPage() {
+    </div>`
+    clearBase()
+}
+
+function clearBase() {
    
-// //     formDisplay.textContent =""
-// //     order.textContent = ""
-// //     main.innerHTML += `<div class = "thank-you-msg">
-// //     <div>thank you for buying</div>
+    order.remove()
 
-// //     </div>`
-// //     console.log("thank you")
-// // }
+}
