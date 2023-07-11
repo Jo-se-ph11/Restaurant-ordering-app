@@ -45,6 +45,7 @@ const circles = document.querySelectorAll(".circle");
 circles.forEach(circle => {
     circle.addEventListener("click", () => {
             if(circle.dataset.id == 0) {
+               
                 getPizza()
                 circle.disabled = true
                 if(smallOrder.textContent == ""){
@@ -463,9 +464,9 @@ function getForm() {
     <form  id="myForm" method = "#">
         <div class="form-title">Enter card details</div>
         <div class="form-el">
-            <input type="text" required placeholder = "Enter your name" name = "name" id="name" aria-label="name">
-            <input type="tel" required placeholder = "Enter your number" name = "number" id="number" aria-label="number">
-            <input type="tel" required  placeholder = "Enter card number" name = "tel" id= "card-number" aria-label="card-number">
+            <input type="text" required placeholder = "Enter your name" name = "name" id="name">
+            <input type="tel" required placeholder = "Enter your number" name = "number" id="number">
+            <input type="tel" required  placeholder = "Enter card number" name = "tel" id= "card-number">
         </div>
         <button  type="submit" class = "pay-btn">Pay</button>
     </form>
@@ -480,11 +481,12 @@ function getForm() {
     payBtn.addEventListener("click", (e)=> {
         const name = document.getElementById("name");
         e.preventDefault()
+       
         if(name.value != "" && myNumber.value != "" && cardNumber.value != "" ) {
 
             showCheckOutPage(name.value)
         }else{
-          alert("oga fill the form!! No stress me abeg")
+        //   alert("oga fill the form!! No stress me abeg")
         }
       
     }, {once: true})
