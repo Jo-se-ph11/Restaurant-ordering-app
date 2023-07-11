@@ -269,9 +269,9 @@ function completOrderBtn() {
     const displayBtn = document.querySelector(".btn-display")
         let myOrder = ""
         myOrder = `
-        <div>
+        <div id = "complete">
             <button class="complet-order-btn">
-                Complet oder
+                Complete
             </button>
         </div>
     `
